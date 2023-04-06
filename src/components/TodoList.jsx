@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
 function TodoList({ todo, onDelete, onComplete }) {
+  const [filter, setFilter] = useState("all");
+
+  function handleFilterChange(newFilter) {
+    setFilter(newFilter);
+  }
+
+  const filteredTodos = todo.filter((todo) => {
+    switch (filter) {
+      case "active":
+        return !todo.completed;
+      case "completed":
+        return todo.completed;
+      default:
+        return true;
+    }
+  });
+
   return (
     <div>
       <table>
         <tbody>
-          {todo.map((todos) => (
+          {filteredTodos.map((todos) => (
             <tr key={todos.id}>
               <td
                 style={
@@ -24,6 +41,13 @@ function TodoList({ todo, onDelete, onComplete }) {
           ))}
         </tbody>
       </table>
+      <div>
+        <button onClick={() => handleFilterChange("all")}>All</button>
+        <button onClick={() => handleFilterChange("active")}>Active</button>
+        <button onClick={() => handleFilterChange("completed")}>
+          Completed
+        </button>
+      </div>
     </div>
   );
 }
