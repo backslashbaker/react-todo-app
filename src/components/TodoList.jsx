@@ -1,4 +1,15 @@
 import React, { useState } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Checkbox from "@mui/material/Checkbox";
+import PanoramaFishEyeRoundedIcon from "@mui/icons-material/PanoramaFishEyeRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import IconButton from "@mui/material/IconButton";
 
 function TodoList({ todo, onDelete, onComplete }) {
   const [filter, setFilter] = useState("all");
@@ -19,36 +30,42 @@ function TodoList({ todo, onDelete, onComplete }) {
   });
 
   return (
-    <div>
-      <table>
-        <tbody>
+    <TableContainer>
+      <Table>
+        <TableBody>
           {filteredTodos.map((todos) => (
-            <tr key={todos.id}>
-              <td
+            <TableRow key={todos.id}>
+              <TableCell
                 style={
                   todos.completed ? { textDecoration: "line-through" } : {}
                 }
               >
                 {todos.content}
-                <input
-                  type="checkbox"
+                <Checkbox
+                  icon={<PanoramaFishEyeRoundedIcon />}
                   checked={todos.completed}
                   onChange={() => onComplete(todos.id)}
                 />
-                <button onClick={() => onDelete(todos.id)}>Delete</button>
-              </td>
-            </tr>
+                <IconButton onClick={() => onDelete(todos.id)}>
+                  <CloseRoundedIcon />
+                </IconButton>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
-      <div>
-        <button onClick={() => handleFilterChange("all")}>All</button>
-        <button onClick={() => handleFilterChange("active")}>Active</button>
-        <button onClick={() => handleFilterChange("completed")}>
+        </TableBody>
+      </Table>
+      <ButtonGroup size="small">
+        <Button variant="text" onClick={() => handleFilterChange("all")}>
+          All
+        </Button>
+        <Button variant="text" onClick={() => handleFilterChange("active")}>
+          Active
+        </Button>
+        <Button variant="text" onClick={() => handleFilterChange("completed")}>
           Completed
-        </button>
-      </div>
-    </div>
+        </Button>
+      </ButtonGroup>
+    </TableContainer>
   );
 }
 

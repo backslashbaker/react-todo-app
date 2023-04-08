@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import CreateTodo from "./components/CreateTodo";
 import Header from "./components/Header";
 import TodoList from "./components/TodoList";
@@ -25,16 +28,21 @@ function App() {
     );
   }
   return (
-    <div>
-      <Header />
-      {console.log(todos)}
-      <CreateTodo onSubmit={addTodo} />
-      <TodoList
-        todo={todos}
-        onDelete={removeTodo}
-        onComplete={toggleTodoCompleted}
-      />
-    </div>
+    <>
+      <Container maxWidth="sm">
+        <Paper>
+          <Header />
+          <Stack spacing={2}>
+            <CreateTodo onSubmit={addTodo} />
+            <TodoList
+              todo={todos}
+              onDelete={removeTodo}
+              onComplete={toggleTodoCompleted}
+            />
+          </Stack>
+        </Paper>
+      </Container>
+    </>
   );
 }
 

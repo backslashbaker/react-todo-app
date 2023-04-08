@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
 
 function CreateTodo({ onSubmit }) {
   const [content, setContent] = useState("");
@@ -14,8 +15,17 @@ function CreateTodo({ onSubmit }) {
   }
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={content} onChange={handleChange} />
-      <button type="submit">Add</button>
+      <TextField
+        variant="outlined"
+        size="small"
+        fullWidth
+        type="text"
+        value={content}
+        onChange={handleChange}
+      />
+      {/* <button onClick={handleSubmit} variant="text">
+        Add
+      </button> */}
     </form>
   );
 }
