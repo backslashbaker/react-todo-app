@@ -23,9 +23,6 @@ function CreateTodo({ onSubmit }) {
         value={content}
         onChange={handleChange}
       />
-      {/* <button onClick={handleSubmit} variant="text">
-        Add
-      </button> */}
     </form>
   );
 }
