@@ -55,13 +55,25 @@ function TodoList({ todo, onDelete, onComplete }) {
         </TableBody>
       </Table>
       <ButtonGroup size="small">
-        <Button variant="text" onClick={() => handleFilterChange("all")}>
+        <Button
+          variant="text"
+          style={{ fontSize: "8px" }}
+          onClick={() => handleFilterChange("all")}
+        >
           All
         </Button>
-        <Button variant="text" onClick={() => handleFilterChange("active")}>
+        <Button
+          variant="text"
+          style={{ fontSize: "8px" }}
+          onClick={() => handleFilterChange("active")}
+        >
           Active
         </Button>
-        <Button variant="text" onClick={() => handleFilterChange("completed")}>
+        <Button
+          variant="text"
+          style={{ fontSize: "8px" }}
+          onClick={() => handleFilterChange("completed")}
+        >
           Completed
         </Button>
       </ButtonGroup>
