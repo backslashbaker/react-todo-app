@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -30,26 +31,26 @@ function TodoList({ todo, onDelete, onComplete }) {
   });
 
   return (
-    <TableContainer>
+    <TableContainer component={Paper}>
       <Table>
         <TableBody>
           {filteredTodos.map((todos) => (
             <TableRow key={todos.id}>
+              <Checkbox
+                icon={<PanoramaFishEyeRoundedIcon />}
+                checked={todos.completed}
+                onChange={() => onComplete(todos.id)}
+              />
               <TableCell
                 style={
                   todos.completed ? { textDecoration: "line-through" } : {}
                 }
               >
                 {todos.content}
-                <Checkbox
-                  icon={<PanoramaFishEyeRoundedIcon />}
-                  checked={todos.completed}
-                  onChange={() => onComplete(todos.id)}
-                />
-                <IconButton onClick={() => onDelete(todos.id)}>
-                  <CloseRoundedIcon />
-                </IconButton>
               </TableCell>
+              {/* <IconButton onClick={() => onDelete(todos.id)}>
+                <CloseRoundedIcon />
+              </IconButton> */}
             </TableRow>
           ))}
         </TableBody>

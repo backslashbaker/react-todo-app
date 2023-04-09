@@ -29,21 +29,24 @@ function App() {
   }
   return (
     <>
-      <Container maxWidth="sm">
-        <Header />
+      <Container maxWidth="lg" className="backgroundImage">
+        <Container maxWidth="sm">
+          <div>
+            <Header />
+          </div>
 
-        <Stack spacing={2}>
-          <Paper>
-            <CreateTodo onSubmit={addTodo} />
-          </Paper>
-          <Paper>
+          <Stack spacing={2}>
+            <Paper>
+              <CreateTodo onSubmit={addTodo} />
+            </Paper>
+
             <TodoList
               todo={todos}
               onDelete={removeTodo}
               onComplete={toggleTodoCompleted}
             />
-          </Paper>
-        </Stack>
+          </Stack>
+        </Container>
       </Container>
     </>
   );
