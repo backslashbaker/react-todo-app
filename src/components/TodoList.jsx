@@ -19,6 +19,14 @@ function TodoList({ todo, onDelete, onComplete }) {
     setFilter(newFilter);
   }
 
+  function handleMouseOver(e) {
+    e.target.style.color = "red";
+  }
+
+  function handleMouseOut(e) {
+    e.target.style.color = "black";
+  }
+
   const filteredTodos = todo.filter((todo) => {
     switch (filter) {
       case "active":
@@ -48,9 +56,9 @@ function TodoList({ todo, onDelete, onComplete }) {
               >
                 {todos.content}
               </TableCell>
-              {/* <IconButton onClick={() => onDelete(todos.id)}>
+              <IconButton onClick={() => onDelete(todos.id)}>
                 <CloseRoundedIcon />
-              </IconButton> */}
+              </IconButton>
             </TableRow>
           ))}
         </TableBody>
@@ -58,22 +66,28 @@ function TodoList({ todo, onDelete, onComplete }) {
       <ButtonGroup size="small">
         <Button
           variant="text"
-          style={{ fontSize: "8px" }}
+          style={{ fontSize: "8px", color: "black" }}
           onClick={() => handleFilterChange("all")}
+          onMouseEnter={handleMouseOver}
+          onMouseOut={handleMouseOut}
         >
           All
         </Button>
         <Button
           variant="text"
-          style={{ fontSize: "8px" }}
+          style={{ fontSize: "8px", color: "black" }}
           onClick={() => handleFilterChange("active")}
+          onMouseEnter={handleMouseOver}
+          onMouseOut={handleMouseOut}
         >
           Active
         </Button>
         <Button
           variant="text"
-          style={{ fontSize: "8px" }}
+          style={{ fontSize: "8px", color: "black" }}
           onClick={() => handleFilterChange("completed")}
+          onMouseEnter={handleMouseOver}
+          onMouseOut={handleMouseOut}
         >
           Completed
         </Button>
