@@ -48,21 +48,28 @@ function TodoList({ todo, onDelete, onComplete, onClear }) {
         <TableBody>
           {filteredTodos.map((todos) => (
             <TableRow key={todos.id}>
-              <Checkbox
-                icon={<PanoramaFishEyeRoundedIcon />}
-                checked={todos.completed}
-                onChange={() => onComplete(todos.id)}
-              />
+              <TableCell style={{ textAlign: "left", width: "10%" }}>
+                <Checkbox
+                  icon={<PanoramaFishEyeRoundedIcon />}
+                  checked={todos.completed}
+                  onChange={() => onComplete(todos.id)}
+                />
+              </TableCell>
+
               <TableCell
                 style={
-                  todos.completed ? { textDecoration: "line-through" } : {}
+                  todos.completed
+                    ? { textDecoration: "line-through", width: "80%" }
+                    : { width: "80%" }
                 }
               >
                 {todos.content}
               </TableCell>
-              <IconButton onClick={() => onDelete(todos.id)}>
-                <CloseRoundedIcon />
-              </IconButton>
+              <TableCell style={{ textAlign: "right", width: "10%" }}>
+                <IconButton onClick={() => onDelete(todos.id)}>
+                  <CloseRoundedIcon />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
