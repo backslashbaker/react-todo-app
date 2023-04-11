@@ -27,6 +27,10 @@ function App() {
       })
     );
   }
+
+  function clearCompleted() {
+    setTodos(todos.filter((todo) => !todo.completed));
+  }
   return (
     <>
       <Container maxWidth="lg" className="backgroundImage">
@@ -44,6 +48,7 @@ function App() {
               todo={todos}
               onDelete={removeTodo}
               onComplete={toggleTodoCompleted}
+              onClear={clearCompleted}
             />
           </Stack>
         </Container>

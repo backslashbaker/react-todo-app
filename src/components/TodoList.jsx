@@ -12,7 +12,7 @@ import PanoramaFishEyeRoundedIcon from "@mui/icons-material/PanoramaFishEyeRound
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import IconButton from "@mui/material/IconButton";
 
-function TodoList({ todo, onDelete, onComplete }) {
+function TodoList({ todo, onDelete, onComplete, onClear }) {
   const [filter, setFilter] = useState("all");
 
   function handleFilterChange(newFilter) {
@@ -20,11 +20,15 @@ function TodoList({ todo, onDelete, onComplete }) {
   }
 
   function handleMouseOver(e) {
-    e.target.style.color = "red";
+    e.target.style.color = "#3A7CFD";
   }
 
   function handleMouseOut(e) {
-    e.target.style.color = "black";
+    if (e.target.name !== "clearCompleted") {
+      e.target.style.color = "#9495A5";
+    } else {
+      e.target.style.color = "#E3E4F1";
+    }
   }
 
   const filteredTodos = todo.filter((todo) => {
@@ -66,7 +70,7 @@ function TodoList({ todo, onDelete, onComplete }) {
       <ButtonGroup size="small">
         <Button
           variant="text"
-          style={{ fontSize: "8px", color: "black" }}
+          style={{ fontSize: "8px", color: "#9495A5" }}
           onClick={() => handleFilterChange("all")}
           onMouseEnter={handleMouseOver}
           onMouseOut={handleMouseOut}
@@ -75,7 +79,7 @@ function TodoList({ todo, onDelete, onComplete }) {
         </Button>
         <Button
           variant="text"
-          style={{ fontSize: "8px", color: "black" }}
+          style={{ fontSize: "8px", color: "#9495A5" }}
           onClick={() => handleFilterChange("active")}
           onMouseEnter={handleMouseOver}
           onMouseOut={handleMouseOut}
@@ -84,12 +88,22 @@ function TodoList({ todo, onDelete, onComplete }) {
         </Button>
         <Button
           variant="text"
-          style={{ fontSize: "8px", color: "black" }}
+          style={{ fontSize: "8px", color: "#9495A5" }}
           onClick={() => handleFilterChange("completed")}
           onMouseEnter={handleMouseOver}
           onMouseOut={handleMouseOut}
         >
           Completed
+        </Button>
+        <Button
+          variant="text"
+          name="clearCompleted"
+          style={{ fontSize: "8px", color: "#E3E4F1" }}
+          onClick={onClear}
+          onMouseEnter={handleMouseOver}
+          onMouseOut={handleMouseOut}
+        >
+          Clear Completed
         </Button>
       </ButtonGroup>
     </TableContainer>
