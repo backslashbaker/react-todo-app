@@ -42,6 +42,8 @@ function TodoList({ todo, onDelete, onComplete, onClear }) {
     }
   });
 
+  const remainingTodos = todo.filter((todo) => !todo.completed).length;
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -74,7 +76,13 @@ function TodoList({ todo, onDelete, onComplete, onClear }) {
           ))}
         </TableBody>
       </Table>
-      <ButtonGroup size="small">
+      <div style={{ textAlign: "left", fontSize: "8px" }}>
+        {remainingTodos} {remainingTodos === 1 ? "item" : "items"} left
+      </div>
+      <ButtonGroup
+        size="small"
+        style={{ display: "flex", justifyContent: "center", gap: "1rem" }}
+      >
         <Button
           variant="text"
           style={{ fontSize: "8px", color: "#9495A5" }}
@@ -105,7 +113,10 @@ function TodoList({ todo, onDelete, onComplete, onClear }) {
         <Button
           variant="text"
           name="clearCompleted"
-          style={{ fontSize: "8px", color: "#E3E4F1" }}
+          style={{
+            fontSize: "8px",
+            color: "#E3E4F1",
+          }}
           onClick={onClear}
           onMouseEnter={handleMouseOver}
           onMouseOut={handleMouseOut}
