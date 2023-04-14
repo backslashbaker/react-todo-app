@@ -1,0 +1,22 @@
+.TodoList {
+
+}
+
+.TodoList table tbody tr td:nth-child(1) {
+    text-align: left;
+    width: 10%;
+}
+
+.TodoList .FilterButton {
+    color: #9495A5;
+    font-size: 8px;
+}
+
+.TodoList .FilterClearButton {
+    color: #E3E4F1;
+    font-size: 8px;
+}
+
+.TodoList .FilterClearButton:hover, .TodoList .FilterButton:hover {
+    color: #3A7CFD;
+}
