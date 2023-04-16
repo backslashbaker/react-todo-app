@@ -1,39 +1,40 @@
-import React, { useState } from 'react'
-import Paper from '@mui/material/Paper'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableRow from '@mui/material/TableRow'
-import Button from '@mui/material/Button'
-import ButtonGroup from '@mui/material/ButtonGroup'
-import Checkbox from '@mui/material/Checkbox'
-import PanoramaFishEyeRoundedIcon from '@mui/icons-material/PanoramaFishEyeRounded'
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
-import IconButton from '@mui/material/IconButton'
-import './TodoList.css'
+import React, { useState } from "react";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Checkbox from "@mui/material/Checkbox";
+import PanoramaFishEyeRoundedIcon from "@mui/icons-material/PanoramaFishEyeRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import IconButton from "@mui/material/IconButton";
+import "./TodoList.css";
+
 function TodoList({ todo, onDelete, onComplete, onClear }) {
-  const [filter, setFilter] = useState('all')
+  const [filter, setFilter] = useState("all");
 
   function handleFilterChange(newFilter) {
-    setFilter(newFilter)
+    setFilter(newFilter);
   }
 
   const filteredTodos = todo.filter((todo) => {
     switch (filter) {
-      case 'active':
-        return !todo.completed
-      case 'completed':
-        return todo.completed
+      case "active":
+        return !todo.completed;
+      case "completed":
+        return todo.completed;
       default:
-        return true
+        return true;
     }
-  })
+  });
 
-  const remainingTodos = todo.filter((todo) => !todo.completed).length
+  const remainingTodos = todo.filter((todo) => !todo.completed).length;
 
   return (
-    <TableContainer className='TodoList' component={Paper}>
+    <TableContainer className="TodoList" component={Paper}>
       <Table>
         <TableBody>
           {filteredTodos.map((todos) => (
@@ -47,15 +48,13 @@ function TodoList({ todo, onDelete, onComplete, onClear }) {
               </TableCell>
 
               <TableCell
-                style={
-                  todos.completed
-                    ? { textDecoration: 'line-through', width: '80%' }
-                    : { width: '80%' }
-                }
+                className={`TodoContainer${
+                  todos.completed ? " completed" : ""
+                }`}
               >
                 {todos.content}
               </TableCell>
-              <TableCell style={{ textAlign: 'right', width: '10%' }}>
+              <TableCell className="DeleteButton">
                 <IconButton onClick={() => onDelete(todos.id)}>
                   <CloseRoundedIcon />
                 </IconButton>
@@ -64,45 +63,42 @@ function TodoList({ todo, onDelete, onComplete, onClear }) {
           ))}
         </TableBody>
       </Table>
-      <div style={{ textAlign: 'left', fontSize: '8px' }}>
-        {remainingTodos} {remainingTodos === 1 ? 'item' : 'items'} left
-      </div>
-      <ButtonGroup
-        size='small'
-        style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}
-      >
+      <span style={{ textAlign: "left", fontSize: "8px" }}>
+        {remainingTodos} {remainingTodos === 1 ? "item" : "items"} left
+      </span>
+      <ButtonGroup size="small" className="ButtonRow">
         <Button
-          variant='text'
-          onClick={() => handleFilterChange('all')}
-          className='FilterButton'
+          variant="text"
+          onClick={() => handleFilterChange("all")}
+          className="FilterButton"
         >
           All
         </Button>
         <Button
-          variant='text'
-          onClick={() => handleFilterChange('active')}
-          className='FilterButton'
+          variant="text"
+          onClick={() => handleFilterChange("active")}
+          className="FilterButton"
         >
           Active
         </Button>
         <Button
-          variant='text'
-          onClick={() => handleFilterChange('completed')}
-          className='FilterButton'
+          variant="text"
+          onClick={() => handleFilterChange("completed")}
+          className="FilterButton"
         >
           Completed
         </Button>
         <Button
-          variant='text'
-          name='clearCompleted'
+          variant="text"
+          name="clearCompleted"
           onClick={onClear}
-          className='FilterClearButton'
+          className="FilterClearButton"
         >
           Clear Completed
         </Button>
       </ButtonGroup>
     </TableContainer>
-  )
+  );
 }
 
-export default TodoList
+export default TodoList;

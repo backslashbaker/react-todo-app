@@ -1,22 +1,41 @@
 .TodoList {
+}
 
+.TodoList .TodoContainer {
+  width: 80%;
+}
+
+.TodoList .TodoContainer.completed {
+  text-decoration: line-through;
 }
 
 .TodoList table tbody tr td:nth-child(1) {
-    text-align: left;
-    width: 10%;
+  text-align: left;
+  width: 10%;
 }
 
 .TodoList .FilterButton {
-    color: #9495A5;
-    font-size: 8px;
+  color: #9495a5;
+  font-size: 8px;
 }
 
 .TodoList .FilterClearButton {
-    color: #E3E4F1;
-    font-size: 8px;
+  color: #e3e4f1;
+  font-size: 8px;
 }
 
-.TodoList .FilterClearButton:hover, .TodoList .FilterButton:hover {
-    color: #3A7CFD;
+.TodoList .FilterClearButton:hover,
+.TodoList .FilterButton:hover {
+  color: #3a7cfd;
+}
+
+.TodoList .DeleteButton {
+  text-align: right;
+  width: "10%";
+}
+
+.TodoList .ButtonRow {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
