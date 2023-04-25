@@ -24,6 +24,13 @@ function App() {
 
   async function addTodo(newTodo) {
     try {
+      const trimmedValue = newTodo.content.trim();
+
+      if (trimmedValue === "") {
+        alert("Please enter a valid todo");
+        return;
+      }
+
       const response = await axios.post("http://localhost:3001/api/todos", {
         content: newTodo.content,
         completed: false,
