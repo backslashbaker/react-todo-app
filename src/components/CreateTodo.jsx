@@ -6,7 +6,7 @@ function CreateTodo({ onSubmit }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    onSubmit({ id: Date.now(), content, completed: false });
+    onSubmit({ content, completed: false });
     setContent("");
   }
 

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -9,23 +10,54 @@ import TodoList from "./components/TodoList";
 function App() {
   const [todos, setTodos] = useState([]);
 
-  function addTodo(newTodo) {
-    setTodos([...todos, newTodo]);
+  useEffect(() => {
+    async function fetchTodos() {
+      try {
+        const respoonse = await axios.get("http://localhost:3001/api/todos");
+        setTodos(respoonse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchTodos();
+  }, []);
+
+  async function addTodo(newTodo) {
+    try {
+      const response = await axios.post("http://localhost:3001/api/todos", {
+        content: newTodo.content,
+        completed: false,
+      });
+      setTodos([...todos, response.data]);
+    } catch (error) {
+      console.error("Error adding todo:", error);
+    }
   }
 
-  function removeTodo(id) {
-    setTodos(todos.filter((todo) => todo.id !== id));
+  async function removeTodo(id) {
+    try {
+      await axios.delete(`http://localhost:3001/api/todos/${id}`);
+      setTodos(todos.filter((todo) => todo.id !== id));
+    } catch (error) {
+      console.error("Error deleting todo:", error);
+    }
   }
 
-  function toggleTodoCompleted(id) {
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, completed: !todo.completed };
-        }
-        return todo;
-      })
-    );
+  async function toggleTodoCompleted(id) {
+    try {
+      const todoToUpdate = todos.find((todo) => todo.id === id);
+      if (!todoToUpdate) return;
+
+      const updatedTodo = {
+        ...todoToUpdate,
+        completed: !todoToUpdate.completed,
+      };
+      await axios.put(`http://localhost:3001/api/todos/${id}`, updatedTodo);
+
+      setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
+    } catch (error) {
+      console.error("Error updating todo:", error);
+    }
   }
 
   function clearCompleted() {
